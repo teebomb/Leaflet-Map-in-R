@@ -1,0 +1,88 @@
+---
+title: "LEAFLET MAP PROJ - CRS9WK2"
+author: "Tommy Brant"
+output: html_document
+---
+
+
+
+
+#August 25, 2019
+
+```{r echo=FALSE, warning=FALSE}
+library(leaflet)
+library(htmlwidgets)
+
+#CONSIDER options(viewer = NULL) TO UPLOAD TO WEB PAGE
+
+set.seed(33134)
+#orig from class
+#dfDNU<-data.frame(lat=runif(10,min=34,max=39.3),
+#               lng=runif(10,min=-76.6, max=-76.5))
+
+blizzIcon<-makeIcon(iconUrl="D:/Analyst/COURSERA DATA SCIENCE test/COURSE9WK2/PROJECT/Blizzard.png", iconHeight=16, iconWidth=31)
+blizzLatLong<-data.frame(lat=33.658367, lng=-117.767196)
+
+owlIcon<-makeIcon(iconUrl="D:/Analyst/COURSERA DATA SCIENCE test/COURSE9WK2/PROJECT/OWLarena.png", iconHeight=30, iconWidth=31)
+owlLatLong<-data.frame(lat=34.155506, lng=-118.334304)
+
+
+owlTeams<-c("London Spitfire Gaming House","Los Angeles Valiant Gaming House", "Philadelphia Fusion Gaming House", "Shanghai Dragons Gaming House", "Dallas Fuel Gaming House", "New York Excelsior Gaming House","Los Angeles Gladiators Gaming House", "Houston Outlaws Gaming House", "Boston Uprising Gaming House", "Seoul Dynasty Gaming House")
+
+#length(owlTeams)
+
+#icons<-awesomeIcons(library('ion'))
+iconBase<-awesomeIconList(
+  home = makeAwesomeIcon(icon = "Home", library = "fa")
+)
+
+home1 = makeAwesomeIcon(icon = "Home", library = "fa")
+flag1 = makeAwesomeIcon(icon = "Flag", library = "fa", markerColor="red")
+flag2 = awesomeIcons(icon = "Flag", library = "fa", markerColor="red")
+
+iconz<-iconList(blizzIcon, owlIcon)
+#iconz2<-iconList(home1, home1,home1,home1,home1,home1,home1,home1,blizzIcon,owlIcon)  #needs to be from makeIcon(), not makeAwesomeIcon()
+
+df<-data.frame(lat=runif(10,min=33.85002,max=34.156535),
+               lng=runif(10,min=-118.388740, max=-117.867969))
+df1.1<-cbind(df,owlTeams)
+
+df2<-rbind(blizzLatLong, owlLatLong)
+df2$descr<-c("Blizzard Headquarters", "Blizzard Arena")
+#iconSet1<-c(owlIcon, blizzIcon)   #set of icons
+#iconSet2<-icons(owlIcon, blizzIcon)  #not sure about this - would have to redefine icons
+
+
+m <- df%>%
+  leaflet() %>%
+  addTiles() %>%
+  #addMarkers() 
+  #addMarkers(icon=flag2)  #awesome Icons aren't changing, may need to use awesome markers Fn
+  #addMarkers(icon=blizzIcon)  #works
+  #addMarkers(icon=owlIcon)   #works
+  #addMarkers(icon=iconz) %>% #this now alternates between blizz and owl icon. need a list of 10 icons(not using awesome icons)
+  #addMarkers() %>%  - PREVIOUSLY WORKING
+  addMarkers(label= df1.1$owlTeams) %>%
+  addMarkers(data=df2, lng=df2$lng, lat=df2$lat, icon = iconz, label=df2$descr)%>%
+  setView(lat=33.945963, lng=-118.105015, zoom=9)
+  #BELOWIS NOT NEEDED. LINE OF CDE COVERS IT SINCE DF IS IN ORDER.
+  #addMarkers(data=df2[1, "lng"], df2[1, "lat"] icon = blizzIcon) %>% #needs to be from makeIcon()
+  #addMarkers(data=df2[2, "lng"], df2[2, "lat"] icon = blizzIcon) %>%
+
+  #TO BE DONE: 
+  #addPopups() OR LABELS
+
+
+
+m #Print he map
+#saveWidget(m, file = "mymap.html")
+
+
+
+
+```
+
+
+
+
+

@@ -1,0 +1,13 @@
+Important Information
+It is especially important to submit this assignment before the deadline, January 27, 11:59 PM PST, because it must be graded by others. If you submit late, there may not be enough classmates around to review your work. This makes it difficult - and in some cases, impossible - to produce a grade. Submit on time to avoid these risks.
+i
+ 
+It looks like this is your first peer-graded assignment.  Learn more
+
+InstructionsMy submissionDiscussions
+
+Give your project a descriptive title
+Please provide the URL to the web page you generated from an R Markdown document.
+
+
+URL
